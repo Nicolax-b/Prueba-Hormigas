@@ -1,0 +1,36 @@
+╭─💀─ SHOW ❱❱ No sape mi errores 
+╰──── LOG  ❱❱ 2026-01-12 12:06:36 | undefined.main() | / by zero
+╭─💀─ SHOW ❱❱ Error al dividir por cero 
+╰──── LOG  ❱❱ 2026-01-13 00:04:02 | undefined.main(...) | / by zero
+╭─💀─ SHOW ❱❱ Error al dividir por cero 
+╰──── LOG  ❱❱ 2026-01-13 00:06:04 | undefined.main(...) | / by zero
+╭─💀─ SHOW ❱❱ Error al dividir por cero 
+╰──── LOG  ❱❱ 2026-01-13 00:07:52 | undefined.main(...) | / by zero
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-12 13:18:37 | AntCiberDronDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-12 13:21:11 | AntCiberDronDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-13 12:47:31 | HormigaDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
+╭─💀─ SHOW ❱❱ Error al instanciar classDAO<T> 
+╰──── LOG  ❱❱ 2026-01-13 12:47:31 | FactoryBL.FactoryBL(...) | Ups! Error inesperado. Por favor, contacte al administrador del sistema.
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-13 12:47:52 | HormigaDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
+╭─💀─ SHOW ❱❱ Error al instanciar classDAO<T> 
+╰──── LOG  ❱❱ 2026-01-13 12:47:52 | FactoryBL.FactoryBL(...) | Ups! Error inesperado. Por favor, contacte al administrador del sistema.
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-13 12:47:56 | HormigaDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
+╭─💀─ SHOW ❱❱ Error al instanciar classDAO<T> 
+╰──── LOG  ❱❱ 2026-01-13 12:47:56 | FactoryBL.FactoryBL(...) | Ups! Error inesperado. Por favor, contacte al administrador del sistema.
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-13 12:48:10 | HormigaDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
+╭─💀─ SHOW ❱❱ Error al instanciar classDAO<T> 
+╰──── LOG  ❱❱ 2026-01-13 12:48:10 | FactoryBL.FactoryBL(...) | Ups! Error inesperado. Por favor, contacte al administrador del sistema.
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-13 12:50:37 | HormigaDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
+╭─💀─ SHOW ❱❱ Error al instanciar classDAO<T> 
+╰──── LOG  ❱❱ 2026-01-13 12:50:37 | FactoryBL.FactoryBL(...) | Ups! Error inesperado. Por favor, contacte al administrador del sistema.
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-13 12:51:37 | HormigaDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
+╭─💀─ SHOW ❱❱ Error al instanciar classDAO<T> 
+╰──── LOG  ❱❱ 2026-01-13 12:51:37 | FactoryBL.FactoryBL(...) | Ups! Error inesperado. Por favor, contacte al administrador del sistema.
