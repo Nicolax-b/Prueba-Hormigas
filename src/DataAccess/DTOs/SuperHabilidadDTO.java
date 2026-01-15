@@ -1,42 +1,42 @@
 package DataAccess.DTOs;
 
-public class AntCiberDronDTO {
-    private Integer IdAntCiberDron  ;
-    private String Serie            ;
+public class SuperHabilidadDTO {
+    private Integer IdSuperHabilidad  ;
+    private String Habilidad        ;
     private String Estado           ;
     private String FechaCreacion    ;
     private String FechaModifica    ;
 
-    public AntCiberDronDTO(String serie) {
-        IdAntCiberDron = 0;
-        Serie = serie;
+    public SuperHabilidadDTO(String habilidad) {
+        IdSuperHabilidad = 0;
+        Habilidad = habilidad;
     }
 
-    public AntCiberDronDTO() {
+    public SuperHabilidadDTO() {
     }
 
-    public AntCiberDronDTO(Integer idAntCiberDron, String serie, String estado, String fechaCreacion, String fechaModifica) {
-        IdAntCiberDron = idAntCiberDron;
-        Serie = serie;
+    public SuperHabilidadDTO(Integer idsuperhabilidad, String habilidad, String estado, String fechaCreacion, String fechaModifica) {
+        IdSuperHabilidad = idsuperhabilidad;
+        Habilidad = habilidad;
         Estado = estado;
         FechaCreacion = fechaCreacion;
         FechaModifica = fechaModifica;
     }
 
-    public Integer getIdAntCiberDron() {
-        return IdAntCiberDron;
+    public Integer getIdSuperHabilidad() {
+        return IdSuperHabilidad;
     }
 
-    public void setIdAntCiberDron(Integer IdAntCiberDron) {
-        this.IdAntCiberDron = IdAntCiberDron;
+    public void setIdSuperHabilidad(Integer IdSuperHabilidad) {
+        this.IdSuperHabilidad = IdSuperHabilidad;
     }
 
-    public String getSerie() {
-        return Serie;
+    public String getHabilidad() {
+        return Habilidad;
     }
 
-    public void setSerie(String Serie) {
-        this.Serie = Serie;
+    public void setHabilidad(String Habilidad) {
+        this.Habilidad = Habilidad;
     }
 
     public String getEstado() {
@@ -66,8 +66,8 @@ public class AntCiberDronDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        + "\n IdAntCiberDron        : "+ getIdAntCiberDron()
-        + "\n Serie                 : "+ getSerie      ()
+        + "\n IdSuperHabilidad        : "+ getIdSuperHabilidad()
+        + "\n Habilidad             : "+ getHabilidad      ()
         + "\n Estado                : "+ getEstado      ()
         + "\n FechaCreacion         : "+ getFechaCreacion ()
         + "\n FechaModifica         : "+ getFechaModifica ()

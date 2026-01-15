@@ -2,10 +2,12 @@
 
 import BusinessLogic.Entities.HLarva;
 import BusinessLogic.Entities.Hormiga;
+import BusinessLogic.Entities.BNHSoldado;
 
 public class App {
     public static void main(String[] args)   {
-               
+        BNHSoldado miSoldado = new BNHSoldado();
+        miSoldado.guardar();   
         //Probando el BL
          try {
             HLarva L = new HLarva();

@@ -4,7 +4,7 @@ public class HormigaDTO {
 
     private Integer IdHormiga     ; 
     private Integer IdHormigaTipo ; 
-    private Integer IdSexo        ; 
+    private Integer IdGenoma      ; 
     private Integer IdEstado      ; 
     private String  Nombre        ; 
     private String  Descripcion   ; 
@@ -13,20 +13,20 @@ public class HormigaDTO {
     private String  FechaModifica ;
 
     public HormigaDTO() {}
-    public HormigaDTO(Integer idHormiga, Integer idHormigaTipo, Integer idSexo, Integer idEstado, String nombre,
+    public HormigaDTO(Integer idHormiga, Integer idHormigaTipo, Integer idGenoma, Integer idEstado, String nombre,
             String descripcion) {
         IdHormiga = idHormiga;
         IdHormigaTipo = idHormigaTipo;
-        IdSexo = idSexo;
+        IdGenoma = idGenoma;
         IdEstado = idEstado;
         Nombre = nombre;
         Descripcion = descripcion;
     }
-    public HormigaDTO(Integer idHormiga, Integer idHormigaTipo, Integer idSexo, Integer idEstado, String nombre,
+    public HormigaDTO(Integer idHormiga, Integer idHormigaTipo, Integer idGenoma, Integer idEstado, String nombre,
             String descripcion, String estado, String fechaCreacion, String fechaModifica) {
         IdHormiga = idHormiga;
         IdHormigaTipo = idHormigaTipo;
-        IdSexo = idSexo;
+        IdGenoma = idGenoma;
         IdEstado = idEstado;
         Nombre = nombre;
         Descripcion = descripcion;
@@ -46,11 +46,11 @@ public class HormigaDTO {
     public void setIdHormigaTipo(Integer idHormigaTipo) {
         IdHormigaTipo = idHormigaTipo;
     }
-    public Integer getIdSexo() {
-        return IdSexo;
+    public Integer getIdGenoma()() {
+        return IdGenoma;
     }
-    public void setIdSexo(Integer idSexo) {
-        IdSexo = idSexo;
+    public void setIdSexo(Integer idGenoma) {
+        IdGenoma = idGenoma;
     }
     public Integer getIdEstado() {
         return IdEstado;
@@ -93,7 +93,7 @@ public class HormigaDTO {
         return getClass().getName()
         + "\n IdHormiga     : "+ getIdHormiga       ()
         + "\n IdHormigaTipo : "+ getIdHormigaTipo   ()
-        + "\n IdSexo        : "+ getIdSexo          ()
+        + "\n IdGenoma      : "+ getIdGenoma        ()       
         + "\n IdEstado      : "+ getIdEstado        ()  
         + "\n Nombre        : "+ getNombre          ()
         + "\n Descripcion   : "+ getDescripcion     ()
