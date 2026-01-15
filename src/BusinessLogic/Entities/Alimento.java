@@ -17,6 +17,10 @@ public class Alimento extends IngestaNativa {
         return genoAlimento;
     }
     
+    public String getTipoAlimento() {
+        return this.tipo;
+    }
+    
     @Override
     public boolean inyectar(BNHormiga hormiga) {
         if (genoAlimento != null) {

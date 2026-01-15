@@ -17,7 +17,7 @@ import Infrastructure.Tools.CMDColor;
 
 public class BNEntomologo implements IEntomologo {
 
-    private static final Set<String> BN_VALID_ANTS  = Set.of("HLarva", "HSoldado");
+    private static final Set<String> BN_VALID_ANTS = Set.of("HLarva", "HSoldado");
     private static final Set<String> BN_VALID_FOODS = Set.of("Carnivoro", "Nectarivoros");
 
     private final HormigaDAO BN_hormigaDAO;
@@ -46,7 +46,6 @@ public class BNEntomologo implements IEntomologo {
         BN_hormigaSuperHabilidadDAO = new HormigaSuperHabilidadDAO();
     }
 
-    // ============================ ETL: AntNest ============================
     @Override
     public List<BNHormiga> etlAntNest(String BN_pathFile) {
 
@@ -61,7 +60,9 @@ public class BNEntomologo implements IEntomologo {
             BN_loading("AntNest", BN_raw);
 
             String BN_token = BN_normalizeToken(BN_raw);
-            if (BN_token.isBlank()) continue;
+            if (BN_token.isBlank()) {
+                continue;
+            }
 
             if (!BN_VALID_ANTS.contains(BN_token)) {
                 BN_invalid("AntNest", BN_raw);
@@ -82,22 +83,21 @@ public class BNEntomologo implements IEntomologo {
                     System.out.println(CMDColor.YELLOW + " -> [BaseDatos] " + BN_nombre + " ya existe. Saltando creación." + CMDColor.RESET);
                     // Agregamos a la lista de retorno para que el demo siga funcionando
                     BN_resultado.add(
-                        "HSoldado".equals(BN_token) ? new BNHSoldado() : new BNHLarva()
+                            "HSoldado".equals(BN_token) ? new BNHSoldado() : new BNHLarva()
                     );
-                    continue; 
+                    continue;
                 }
-                // ----------------------------------------------------------------
 
-                Integer BN_idTipo   = BN_hormigaTipoDAO.getIdByNombre(BN_token);
+                Integer BN_idTipo = BN_hormigaTipoDAO.getIdByNombre(BN_token);
                 Integer BN_idEstado = BN_estadoDAO.getIdByNombre("VIVA");
 
-                String  BN_genomaNombre = BN_token.equals("HSoldado") ? "XX" : "X";
-                Integer BN_idGenoma     = BN_genomaDAO.getIdByNombre(BN_genomaNombre);
+                String BN_genomaNombre = BN_token.equals("HSoldado") ? "XX" : "X";
+                Integer BN_idGenoma = BN_genomaDAO.getIdByNombre(BN_genomaNombre);
 
                 if (BN_idTipo == null || BN_idEstado == null || BN_idGenoma == null) {
-                    System.out.println(CMDColor.RED +
-                        "[ETL][BD] Catálogo faltante: " + BN_token +
-                        " / Genoma " + BN_genomaNombre + CMDColor.RESET);
+                    System.out.println(CMDColor.RED
+                            + "[ETL][BD] Catálogo faltante: " + BN_token
+                            + " / Genoma " + BN_genomaNombre + CMDColor.RESET);
                     continue;
                 }
 
@@ -133,8 +133,8 @@ public class BNEntomologo implements IEntomologo {
                 );
 
             } catch (Exception BN_ex) {
-                System.out.println(CMDColor.RED +
-                        "[ETL][ERROR] " + BN_ex.getMessage() + CMDColor.RESET);
+                System.out.println(CMDColor.RED
+                        + "[ETL][ERROR] " + BN_ex.getMessage() + CMDColor.RESET);
             }
         }
 
@@ -156,7 +156,9 @@ public class BNEntomologo implements IEntomologo {
             BN_loading("AntFood", BN_raw);
 
             String BN_token = BN_normalizeToken(BN_raw);
-            if (BN_token.isBlank()) continue;
+            if (BN_token.isBlank()) {
+                continue;
+            }
 
             BN_token = BN_token.replace("Nectarivoro", "Nectarivoros");
 
@@ -177,11 +179,10 @@ public class BNEntomologo implements IEntomologo {
                 if (BN_idExistente != null) {
                     System.out.println(CMDColor.YELLOW + " -> [BaseDatos] " + BN_nombre + " ya existe. Saltando creación." + CMDColor.RESET);
                     BN_resultado.add(
-                        BN_token.equals("Carnivoro") ? new Carnivoro() : new Nectarivoro()
+                            BN_token.equals("Carnivoro") ? new Carnivoro() : new Nectarivoro()
                     );
                     continue;
                 }
-                // ------------------------------------------
 
                 String BN_nombreTipoBD = BN_token.equals("Carnivoro")
                         ? "Carnívoro"
@@ -189,8 +190,8 @@ public class BNEntomologo implements IEntomologo {
 
                 Integer BN_idTipo = BN_alimentoTipoDAO.getIdByNombre(BN_nombreTipoBD);
                 if (BN_idTipo == null) {
-                    System.out.println(CMDColor.RED +
-                        "[ETL][BD] No existe AlimentoTipo: " + BN_nombreTipoBD + CMDColor.RESET);
+                    System.out.println(CMDColor.RED
+                            + "[ETL][BD] No existe AlimentoTipo: " + BN_nombreTipoBD + CMDColor.RESET);
                     continue;
                 }
 
@@ -209,15 +210,14 @@ public class BNEntomologo implements IEntomologo {
                 );
 
             } catch (Exception BN_ex) {
-                System.out.println(CMDColor.RED +
-                        "[ETL][ERROR] " + BN_ex.getMessage() + CMDColor.RESET);
+                System.out.println(CMDColor.RED
+                        + "[ETL][ERROR] " + BN_ex.getMessage() + CMDColor.RESET);
             }
         }
 
         return BN_resultado;
     }
 
-    // ============================ Interfaz ============================
     @Override
     public Alimento preparar(Alimento BN_alimento) {
         System.out.println("[Preparado] -" + BN_alimento.getTipoAlimento() + "-");
@@ -230,20 +230,19 @@ public class BNEntomologo implements IEntomologo {
         return BN_hormiga;
     }
 
-    // ============================ Helpers ============================
     private static void BN_loading(String BN_src, String BN_raw) {
-        System.out.println("[Loading][" + BN_src + "] " +
-                (BN_raw == null ? "" : BN_raw.trim()));
+        System.out.println("[Loading][" + BN_src + "] "
+                + (BN_raw == null ? "" : BN_raw.trim()));
     }
 
     private static void BN_valid(String BN_src, String BN_raw) {
-        System.out.println(CMDColor.BLUE +
-                "[OK][" + BN_src + "] " + BN_raw.trim() + CMDColor.RESET);
+        System.out.println(CMDColor.BLUE
+                + "[OK][" + BN_src + "] " + BN_raw.trim() + CMDColor.RESET);
     }
 
     private static void BN_invalid(String BN_src, String BN_raw) {
-        System.out.println(CMDColor.RED +
-                "[X][" + BN_src + "] " + BN_raw.trim() + CMDColor.RESET);
+        System.out.println(CMDColor.RED
+                + "[X][" + BN_src + "] " + BN_raw.trim() + CMDColor.RESET);
     }
 
     private static List<String> BN_readTokens(String BN_pathFile) {
@@ -252,14 +251,16 @@ public class BNEntomologo implements IEntomologo {
             String[] BN_arr = BN_content.split("[,\\-\\n\\r\\t]+");
             return Arrays.asList(BN_arr);
         } catch (IOException BN_ex) {
-            System.out.println(CMDColor.RED +
-                    "[ETL] No se pudo leer: " + BN_pathFile + CMDColor.RESET);
+            System.out.println(CMDColor.RED
+                    + "[ETL] No se pudo leer: " + BN_pathFile + CMDColor.RESET);
             return List.of();
         }
     }
 
     private static String BN_normalizeToken(String BN_s) {
-        if (BN_s == null) return "";
+        if (BN_s == null) {
+            return "";
+        }
         String BN_x = BN_s.trim().replaceAll("\\s+", " ");
 
         BN_x = Normalizer.normalize(BN_x, Normalizer.Form.NFD);

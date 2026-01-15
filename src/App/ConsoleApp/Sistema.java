@@ -88,17 +88,17 @@ public class Sistema {
     }
 
     System.out.println("... Cargando módulos del sistema ...");
-    ejecutarETL();
+    ejecutarETL(); // <--- Aquí ya se cargaron los datos
 
-    // Demo mínima de vida/muerte (para que el profe lo vea en consola)
+    // Demo mínima
     try {
         BNEntomologo BN_ent = new BNEntomologo();
 
-        var BN_hormigas = BN_ent.etlAntNest(AppConfig.ANTNEST_FILE);
+        var BN_hormigas = BN_ent.etlAntNest(AppConfig.ANTNEST_FILE); 
         var BN_alimentos = BN_ent.etlAntFood(AppConfig.ANTFOOD_FILE);
-
+        
         if (!BN_hormigas.isEmpty() && !BN_alimentos.isEmpty()) {
-            BN_ent.alimentarAnt(BN_hormigas.get(0), BN_ent.preparar(BN_alimentos.get(0)));
+             BN_ent.alimentarAnt(BN_hormigas.get(0), BN_ent.preparar(BN_alimentos.get(0)));
         }
 
     } catch (AppException e) {

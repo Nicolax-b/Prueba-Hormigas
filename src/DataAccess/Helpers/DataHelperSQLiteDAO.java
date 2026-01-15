@@ -12,9 +12,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataHelperSQLiteDAO <T> implements IDAO<T> { //la T significa voy hacer esto en cualquier clase que lo pongan
-    protected final Class<T>DTOClass;   //1.Necesito un DTO
-    protected final String  tableName;  //2.Necesito una tabla cada una con PK
+public class DataHelperSQLiteDAO <T> implements IDAO<T> { 
+    protected final Class<T>DTOClass;
+    protected final String  tableName;
     protected final String  tablePK;    
 
     private static final String DBPath = AppConfig.DATABASE; 
@@ -37,13 +37,6 @@ public class DataHelperSQLiteDAO <T> implements IDAO<T> { //la T significa voy h
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
-    /**
-     * Construye la relacion entre la clase DTO y la tabla de la base de datos
-     * @param dtoClass  : Nombre de la clase DTO
-     * @param tableName : Nombre de la tabla
-     * @param tablePK   : Nombre del PK de la tabla
-     * @throws AppException: Error al asociar la clase con la tabla
-     */
     public DataHelperSQLiteDAO(Class<T> dtoClass, String tableName, String tablePK) throws AppException {
         try {
             openConnection();
@@ -61,10 +54,11 @@ public class DataHelperSQLiteDAO <T> implements IDAO<T> { //la T significa voy h
         StringBuilder columns = new StringBuilder();
         StringBuilder placeholders = new StringBuilder();
 
+        // 1. Construir columnas dinámicamente
         for (Field field : fields) {
             field.setAccessible(true);
             String name = field.getName();
-            // Excluir PK y campos por defecto y auditoria
+            // Excluimos PK y campos de auditoría automáticos de la reflexión
             if (!name.equalsIgnoreCase(tablePK)
                 && !name.equalsIgnoreCase("Estado")
                 && !name.equalsIgnoreCase("FechaCreacion")
@@ -74,14 +68,15 @@ public class DataHelperSQLiteDAO <T> implements IDAO<T> { //la T significa voy h
             }
         }
 
-        // Eliminar la última coma
-        String cols = columns.substring(0, columns.length() - 1);
-        String vals = placeholders.substring(0, placeholders.length() - 1);
+        // 2. Agregar manualmente FechaCreacion para evitar error NOT NULL
+        columns.append("FechaCreacion");
+        placeholders.append("?");
 
-        String sql = String.format("INSERT INTO %s (%s) VALUES (%s)", tableName, cols, vals);
+        String sql = String.format("INSERT INTO %s (%s) VALUES (%s)", tableName, columns, placeholders);
 
         try (PreparedStatement stmt = openConnection().prepareStatement(sql)) {
             int index = 1;
+            // Setear valores de los campos de la clase
             for (Field field : fields) {
                 String name = field.getName();
                 if (!name.equalsIgnoreCase(tablePK)
@@ -90,6 +85,10 @@ public class DataHelperSQLiteDAO <T> implements IDAO<T> { //la T significa voy h
                     && !name.equalsIgnoreCase("FechaModifica")) 
                         stmt.setObject(index++, field.get(entity));
             }
+            
+            // Setear la fecha actual
+            stmt.setString(index++, getDataTimeNow());
+
             return (stmt.executeUpdate() > 0);
         } catch (SQLException | IllegalAccessException e) {
             throw new AppException(null, e, getClass(), "create");
@@ -116,7 +115,7 @@ public class DataHelperSQLiteDAO <T> implements IDAO<T> { //la T significa voy h
                 }
             }
 
-            updates.append("FechaModifica = ?"); // campo técnico de auditoría
+            updates.append("FechaModifica = ?"); 
 
             String sql = String.format("UPDATE %s SET %s WHERE %s = ?", tableName, updates, tablePK);
 
@@ -132,8 +131,8 @@ public class DataHelperSQLiteDAO <T> implements IDAO<T> { //la T significa voy h
                     }
                 }
 
-                stmt.setString(index++, getDataTimeNow()); // FechaModifica
-                stmt.setObject(index, pkValue); // WHERE PK = ?
+                stmt.setString(index++, getDataTimeNow()); 
+                stmt.setObject(index, pkValue); 
 
                 return stmt.executeUpdate() > 0;
             }
@@ -201,7 +200,7 @@ public class DataHelperSQLiteDAO <T> implements IDAO<T> { //la T significa voy h
             ResultSetMetaData meta = rs.getMetaData();
 
             for (int i = 1; i <= meta.getColumnCount(); i++) {
-                String col = meta.getColumnLabel(i); // usa alias si existen
+                String col = meta.getColumnLabel(i); 
                 Object val = rs.getObject(i);
 
                 Field field = DTOClass.getDeclaredField(col);

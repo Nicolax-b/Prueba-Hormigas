@@ -6,7 +6,6 @@ import DataAccess.DAOs.HormigaDAO;
 import DataAccess.DTOs.HormigaDTO;
 import Infrastructure.AppException;
 import Infrastructure.Tools.CMDColor;
-
 import java.util.List;
 
 public abstract class BNHormiga implements IHormiga {
@@ -110,18 +109,23 @@ public abstract class BNHormiga implements IHormiga {
         }
     }
 
-    @Override
     public BNHormiga alimentarAnt(BNHormiga BN_hormiga, Alimento BN_alimento) {
 
         if (BN_hormiga == null || BN_alimento == null) {
             return BN_hormiga;
         }
 
-        String BN_tipoHormiga = BN_hormiga.getClass().getSimpleName();   // BNHSoldado / BNHLarva
-        String BN_tipoAlimento = BN_alimento.getClass().getSimpleName();  // Carnivoro / Nectarivoro
+        String BN_tipoHormiga = BN_hormiga.getClass().getSimpleName();
+        String BN_tipoAlimento = BN_alimento.getClass().getSimpleName();
+
+        System.out.println("=================================");
+        System.out.println("[ALIMENTANDO]");
+        System.out.println("Hormiga : " + BN_tipoHormiga);
+        System.out.println("Alimento: " + BN_tipoAlimento);
 
         boolean BN_vive = false;
 
+        // Reglas de vida
         if ("BNHSoldado".equals(BN_tipoHormiga)) {
             BN_vive = "Carnivoro".equals(BN_tipoAlimento);
         } else if ("BNHLarva".equals(BN_tipoHormiga)) {
@@ -129,17 +133,24 @@ public abstract class BNHormiga implements IHormiga {
         }
 
         if (!BN_vive) {
-            System.out.println(CMDColor.RED + "[MUERE] " + BN_tipoHormiga + " comió " + BN_tipoAlimento + CMDColor.RESET);
+            System.out.println(CMDColor.RED + "[MUERE]" + CMDColor.RESET);
+            System.out.println("=================================");
             return BN_hormiga;
         }
 
-        System.out.println(CMDColor.BLUE + "[VIVE] " + BN_tipoHormiga + " comió " + BN_tipoAlimento + CMDColor.RESET);
+        System.out.println(CMDColor.BLUE + "[VIVE]" + CMDColor.RESET);
 
-        // Si quieres mostrar habilidad del caso (sin depender de setters):
+        // CASO CLAVE: superpoder
         if ("BNHSoldado".equals(BN_tipoHormiga)) {
-            System.out.println(CMDColor.BLUE + "[HABILIDAD] HSoldado => superSaltar (caso XX)" + CMDColor.RESET);
+            System.out.println("[GENOMA] XX");
+            System.out.println(CMDColor.BLUE
+                    + "[SUPERPODER ADQUIRIDO] superSaltar"
+                    + CMDColor.RESET);
+        } else {
+            System.out.println("[SIN SUPERPODER]");
         }
 
+        System.out.println("=================================");
         return BN_hormiga;
     }
 
