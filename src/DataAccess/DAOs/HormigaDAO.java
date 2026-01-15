@@ -1,16 +1,16 @@
 package DataAccess.DAOs;
 
+import DataAccess.DTOs.HormigaDTO;
+import DataAccess.DTOs.VWHormigaDTO;
+import DataAccess.Helpers.DataHelperSQLiteDAO;
+import Infrastructure.AppException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import DataAccess.DTOs.HormigaDTO;
-import DataAccess.DTOs.VWHormigaDTO;
-import DataAccess.Helpers.DataHelperSQLiteDAO;
-import Infrastructure.AppException;
 
 public class HormigaDAO extends DataHelperSQLiteDAO<HormigaDTO>{
     public HormigaDAO() throws AppException {
@@ -53,4 +53,14 @@ public class HormigaDAO extends DataHelperSQLiteDAO<HormigaDTO>{
         }
         return lst;
     }
+    public Integer getIdByNombre(String nombre) throws AppException {
+    String sql = "SELECT IdHormiga FROM Hormiga WHERE Nombre = ? AND Estado = 'A'";
+    try (PreparedStatement ps = openConnection().prepareStatement(sql)) {
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        return rs.next() ? rs.getInt("IdHormiga") : null;
+    } catch (SQLException e) {
+        throw new AppException("Error getIdByNombre Hormiga", e, getClass(), "getIdByNombre");
+    }
+}
 }
