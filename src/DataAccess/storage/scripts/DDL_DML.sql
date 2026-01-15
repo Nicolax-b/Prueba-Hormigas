@@ -1,5 +1,4 @@
--- © 2K26 ❱──💀──❰ pat_mic ? code is life : life is code
--- database: storage\Databases\antCiberDron.sqlite
+-- database: storage\Databases\MAHormiguero.sqlite
 
 DROP TABLE IF EXISTS HormigaSuperHabilidad;
 DROP TABLE IF EXISTS HormigaAlimento;

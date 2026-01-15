@@ -26,19 +26,17 @@ public abstract class BNHormiga implements IHormiga {
         try {
             bnData.setNombre(this.bnNombre);
             bnData.setDescripcion("Hormiga Gestionada");
-            
+
             bnData.setIdHormigaTipo(getIdTipo(this.bnTipo));
-            bnData.setIdSexo(getIdSexo(this.bnSexo));
+
             bnData.setIdEstado(this.bnEstado.equals("VIVA") ? 1 : 2);
-            
+
             bnData.setIdGenoma(getIdGenomaPorSexo(this.bnSexo)); 
 
             if (bnData.getIdHormiga() != null && bnData.getIdHormiga() > 0) {
                 return bnFactory.upd(bnData);
-                
             } else {
-                boolean guardado = bnFactory.add(bnData);
-                return guardado;
+                return bnFactory.add(bnData);
             }
 
         } catch (AppException e) {
@@ -67,9 +65,8 @@ public abstract class BNHormiga implements IHormiga {
             case "Macho":   return 2; // Genoma XX
             case "Hembra":  return 3; // Genoma XY
             default:        return 1;
-    }
-
-    // Getters y Setters de Lógica
+        }
+    } 
     public String getTipo() { return bnTipo; }
     public void setTipo(String tipo) { this.bnTipo = tipo; }
     public String getSexo() { return bnSexo; }
