@@ -1,0 +1,15 @@
+-HLarva    -Nectarívoros        -Carnívoro        -Omnívoro  -Insectívoro  -	Nectarívoros    - Herbívoro-Nectarívoros        -Carnívoro        -Omnívoro  -Insectívoro  -	Nectarívoros    - Herbívoro 
+-HLarva     -Nectarívoros          -Carnívoro          -Omnívoro   -Insectívoro   -	Nectarívoros   
+ - Herbívoro -HLarva     -Nectarívoros          -Carnívoro      -Omnívoro   -Insectívoro  
+  -	Nectarívoros    - Herbívoro -HLarva     -Nectarívoros      -Carnívoro          -Omnívoro   -Insectívoro   -Nectarívoros    - Herbívoro
+  -Nectarívoros        -Carnívoro        -Omnívoro  -Insectívoro  -	Nectarívoros    - Herbívoro 
+  -Nectarívoros        -Carnívoro        -Omnívoro  -Insectívoro  -	Nectarívoros    - Herbívoro 
+-Nectarívoros        -Carnívoro        -Omnívoro  -Insectívoro  -	Nectarívoros    - Herbívoro 
+    -HLarva     -Nectarívoros          -Carnívoro          -Omnívoro   -Insectívoro   -	Nectarívoros   
+     - Herbívoro -HLarva     -Nectarívoros          -Carnívoro      -Omnívoro   -Insectívoro  
+      -	Nectarívoros    - Herbívoro -HLarva     -Nectarívoros      -Carnívoro          -Omnívoro   -Insectívoro   -	Nectarívoros    - Herbívoro
+-Nectarívoros        -Carnívoro   -Nectarívoros        -Carnívoro        -Omnívoro  -Insectívoro  -	Nectarívoros    - Herbívoro 
+-HLarva     -Nectarívoros          -Carnívoro          -Omnívoro   -Insectívoro   -	Nectarívoros   
+ - Herbívoro -HLarva     -Nectarívoros          -Carnívoro      -Omnívoro   -Insectívoro  
+  -	Nectarívoros    - Herbívoro -HLarva     -Nectarívoros      -Carnívoro          -Omnívoro   -Insectívoro   -Nectarívoros    - Herbívoro
+  -Nectarívoros        -Carnívoro  

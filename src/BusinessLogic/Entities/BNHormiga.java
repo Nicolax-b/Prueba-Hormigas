@@ -25,17 +25,24 @@ public abstract class BNHormiga implements IHormiga {
     public boolean guardar() {
         try {
             bnData.setNombre(this.bnNombre);
-            bnData.setDescripcion("Hormiga del Examen");
-            bnData.setEstado("A"); // A = Activo en BD
+            bnData.setDescripcion("Hormiga Gestionada");
+            
             bnData.setIdHormigaTipo(getIdTipo(this.bnTipo));
             bnData.setIdSexo(getIdSexo(this.bnSexo));
             bnData.setIdEstado(this.bnEstado.equals("VIVA") ? 1 : 2);
-            bnData.setIdGenoma(1); // Por defecto o define lógica para esto
+            
+            bnData.setIdGenoma(getIdGenomaPorSexo(this.bnSexo)); 
 
-            return bnFactory.add(bnData);
+            if (bnData.getIdHormiga() != null && bnData.getIdHormiga() > 0) {
+                return bnFactory.upd(bnData);
+                
+            } else {
+                boolean guardado = bnFactory.add(bnData);
+                return guardado;
+            }
 
         } catch (AppException e) {
-            System.out.println("Error al guardar: " + e.getMessage());
+            System.out.println("Error al guardar/actualizar: " + e.getMessage());
             return false;
         }
     }

@@ -1,58 +1,45 @@
 package BusinessLogic.Entities;
 
-import DataAccess.DTOs.HormigaDTO;
-import Infrastructure.AppException;
-import java.util.List;
+public class BNHLarva extends BNHormiga {
 
-public class HLarva extends Hormiga {
-   public BNHLarva() {
+    public BNHLarva() {
         super();
         this.bnTipo = "Larva";
         this.bnSexo = "Asexual"; 
     }
 
-   public HormigaDTO getLarva(int id) throws AppException {
-      this.data = (HormigaDTO)this.factory.getBy(id);
-      return this.data;
-   }
-
-   public List<HormigaDTO> getLarvas() throws AppException {
-      return this.factory.getAll();
-   }
-
-   @Override 
-   public void comer(IngestaNativa alimento){
+    @Override
+    public void comer(IngestaNativa alimento) {
         System.out.println("La Larva está comiendo " + alimento.toString());
-        if (alimento.toString().equals("Carnivoro")) {
-            System.out.println(">> ¡La Larva ha comido CARNE y evoluciona a SOLDADO!");
+
+        if (alimento.toString().equals("Carnivoro") || alimento instanceof Carnivoro) {
             
+            System.out.println("¡La Larva ha comido CARNE! Comienza la metamorfosis...");
             this.evolucionarASoldado(alimento);
             
         } else {
-            System.out.println("La Larva come pero no evoluciona (necesita Carne).");
+            System.out.println("... La Larva se alimenta, pero sigue siendo Larva.");
         }
-    }
-    //Refactory: Void y cambio de Alimento -> IngestaNativa
-    private void IntentarEvolucionar(IngestaNativa alimento) {
-        BNHSoldado nuevoSoldado = new BNHSoldado();
-        
-        nuevoSoldado.bnIdHormiga = this.bnIdHormiga; 
-                
-        if (alimento instanceof Alimento) {
-            Alimento comida = (Alimento) alimento;
-            GenoAlimento genoma = comida.getGenoAlimento(); // Asumiendo que Alimento tiene este getter
-            
-            if (genoma != null && genoma.toString().equals("XX")) {
-                System.out.println(">> ¡GENOMA XX DETECTADO! El Soldado adquiere SUPERPODERES.");
-                nuevoSoldado.setSuperHabilidad("SuperSalto"); 
-            }
-        }
-        
-        this.bnTipo = nuevoSoldado.getTipo();
-        this.bnSexo = nuevoSoldado.getSexo();
     }
 
-   public String toString() {
-      return "HLarva {}";
-   }
+    private void evolucionarASoldado(IngestaNativa alimento) {
+        this.bnTipo = "Soldado";
+        this.bnSexo = "Macho"; 
+
+        if (alimento instanceof Alimento) {
+            Alimento comida = (Alimento) alimento;
+            GenoAlimento genoma = comida.getGenoAlimento(); 
+            
+            if (genoma != null && genoma.toString().equals("XX")) {
+                System.out.println("¡GENOMA XX DETECTADO! (Macho)");
+                System.out.println("La hormiga ha adquirido SUPERSALTO (SuperHabilidad)");
+            }
+        }
+
+        if (this.guardar()) {
+            System.out.println("Evolución guardada en Base de Datos: Ahora es un SOLDADO MACHO.");
+        } else {
+            System.out.println("Error al guardar la evolución en la BD.");
+        }
+    }
 }

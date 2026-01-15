@@ -1,34 +1,34 @@
 package DataAccess.DTOs;
 
-public class SexoDTO {
-    private Integer IdSexo       ;
+public class GenomaDTO {
+    private Integer IdGenoma       ;
     private String  Nombre       ;
     private String  Descripcion  ;
     private String  Estado       ;
     private String  FechaCreacion;
     private String  FechaModifica;
 
-    public SexoDTO() {
+    public GenomaDTO() {
     }
-    public SexoDTO(String nombre, String descripcion) {
-        IdSexo = 0;
+    public GenomaDTO(String nombre, String descripcion) {
+        IdGenoma = 0;
         Nombre = nombre;
         Descripcion = descripcion;
     }
-    public SexoDTO(Integer idSexo, String nombre, String descripcion, String estado, String fechaCreacion,
+    public GenomaDTO(Integer idGenoma, String nombre, String descripcion, String estado, String fechaCreacion,
             String fechaModifica) {
-        IdSexo = idSexo;
+        IdGenoma = idGenoma;
         Nombre = nombre;
         Descripcion = descripcion;
         Estado = estado;
         FechaCreacion = fechaCreacion;
         FechaModifica = fechaModifica;
     }
-    public Integer getIdSexo() {
-        return IdSexo;
+    public Integer getIdGenoma() {
+        return IdGenoma;
     }
-    public void setIdSexo(Integer idSexo) {
-        IdSexo = idSexo;
+    public void setIdGenoma(Integer idGenoma) {
+        IdGenoma = idGenoma;
     }
     public String getNombre() {
         return Nombre;
@@ -64,7 +64,7 @@ public class SexoDTO {
     @Override
     public String toString(){
         return getClass().getName()
-        + "\n IdSexo        : "+ getIdSexo      ()
+        + "\n IdGenoma        : "+ getIdGenoma      ()
         + "\n Nombre        : "+ getNombre      ()
         + "\n Descripcion   : "+ getDescripcion ()
         + "\n Estado        : "+ getEstado      ()
