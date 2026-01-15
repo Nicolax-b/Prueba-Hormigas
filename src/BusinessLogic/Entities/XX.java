@@ -7,12 +7,16 @@ public class XX extends GenoAlimento {
     }
 
     @Override
-    public boolean inyectar(Hormiga hormiga){
-        System.out.println("\t(GenoAlimento): Inyectar Genoma XX");
+    public boolean inyectar(BNHormiga hormiga) {
+        System.out.println("\t(GenoAlimento) Inyectando Genoma XX -> Sexo: MACHO");
         hormiga.setSexo("Macho");
-        hormiga.setTipo("Soldado");
 
-        return true;
+        if (hormiga instanceof BNHSoldado) {
+            BNHSoldado soldado = (BNHSoldado) hormiga;
+            soldado.setSuperHabilidad("SuperSalto");
+            System.out.println("\t¡Mutación Genética! Habilidad adquirida: " + soldado.getSuperHabilidad());
+        }
+        
+        return true; 
     }
-    
 }

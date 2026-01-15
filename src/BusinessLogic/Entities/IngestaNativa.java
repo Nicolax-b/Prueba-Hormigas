@@ -1,6 +1,6 @@
 package BusinessLogic.Entities;
 
-import BusinessLogic.Entities.BNHormiga.IIngestaNativa;
+import BusinessLogic.Interface.IIngestaNativa;
 
 public abstract class IngestaNativa implements IIngestaNativa{
     protected String tipo;

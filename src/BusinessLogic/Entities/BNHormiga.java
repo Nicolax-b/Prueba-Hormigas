@@ -5,6 +5,7 @@ import BusinessLogic.Interface.IHormiga;
 import DataAccess.DAOs.HormigaDAO;
 import DataAccess.DTOs.HormigaDTO;
 import Infrastructure.AppException;
+import java.util.List;
 
 public abstract class BNHormiga implements IHormiga {
 
@@ -19,29 +20,54 @@ public abstract class BNHormiga implements IHormiga {
     public BNHormiga() {
         this.bnEstado = "VIVA";
         this.bnSexo = "Asexual"; 
+        // Nombre único basado en el tiempo para evitar duplicados en BD
         this.bnNombre = "Ant_" + System.currentTimeMillis(); 
     }
 
     public boolean guardar() {
         try {
             bnData.setNombre(this.bnNombre);
-            bnData.setDescripcion("Hormiga Gestionada");
-
+            bnData.setDescripcion("Simulacion Examen");
+            
+            // Mapeos
             bnData.setIdHormigaTipo(getIdTipo(this.bnTipo));
-
             bnData.setIdEstado(this.bnEstado.equals("VIVA") ? 1 : 2);
-
             bnData.setIdGenoma(getIdGenomaPorSexo(this.bnSexo)); 
 
+            // Lógica Active Record (Insert o Update)
+            boolean exito = false;
+            
+            // Si ya tenemos ID, actualizamos
             if (bnData.getIdHormiga() != null && bnData.getIdHormiga() > 0) {
-                return bnFactory.upd(bnData);
+                exito = bnFactory.upd(bnData);
             } else {
-                return bnFactory.add(bnData);
+                // Si no, creamos
+                exito = bnFactory.add(bnData);
+                
+                // TRUCO: Recuperar el ID recién creado para poder actualizarlo después
+                if(exito) {
+                    recuperarIdDeBaseDatos();
+                }
             }
+            return exito;
 
         } catch (AppException e) {
             System.out.println("Error al guardar/actualizar: " + e.getMessage());
             return false;
+        }
+    }
+    private void recuperarIdDeBaseDatos() {
+        try {
+            // Buscamos todas y filtramos por el nombre único que acabamos de poner
+            List<HormigaDTO> lista = bnFactory.getAll();
+            for (HormigaDTO dto : lista) {
+                if (dto.getNombre().equals(this.bnNombre)) {
+                    this.bnData.setIdHormiga(dto.getIdHormiga());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo sincronizar ID");
         }
     }
 
@@ -59,14 +85,16 @@ public abstract class BNHormiga implements IHormiga {
     }
 
     private int getIdGenomaPorSexo(String sexo) {
-        if (sexo == null) return 1; // Default X
+        if (sexo == null) return 1; 
         switch (sexo) {
-            case "Asexual": return 1; // Genoma X
-            case "Macho":   return 2; // Genoma XX
-            case "Hembra":  return 3; // Genoma XY
+            case "Asexual": return 1; // X
+            case "Macho":   return 2; // XX
+            case "Hembra":  return 3; // XY
             default:        return 1;
         }
     } 
+
+    // Getters y Setters
     public String getTipo() { return bnTipo; }
     public void setTipo(String tipo) { this.bnTipo = tipo; }
     public String getSexo() { return bnSexo; }
