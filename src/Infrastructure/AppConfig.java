@@ -6,8 +6,8 @@ import java.net.URL;
 public abstract class AppConfig {
     //Paths Storage
     public static final String DATABASE = "jdbc:sqlite:src\\DataAccess\\storage\\Databases\\MAHormiguero.sqlite";
-    public static final String ANTNEST_FILE = "src\\DataAccess\\storage\\DataFiles\\AntNest.text";
-    public static final String ANTFOOD_FILE = "src\\DataAccess\\storage\\DataFiles\\Antfood.txt";
+    public static final String ANTNEST_FILE = "src\\DataAccess\\storage\\DataFiles\\AntNest.txt";
+    public static final String ANTFOOD_FILE = "src\\DataAccess\\storage\\DataFiles\\AntFood.txt";
     public static final String LOGFILE  = "src\\\\DataAccess\\storage\\Logs\\AppErrors.log";
 
 

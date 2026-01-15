@@ -80,6 +80,33 @@ public class Sistema {
         }
     }
 
+    public void ejecutarAplicacion() {
+    MABienvenida();
+
+    if (!MAAutenticacion()) {
+        System.exit(0);
+    }
+
+    System.out.println("... Cargando módulos del sistema ...");
+    ejecutarETL();
+
+    // Demo mínima de vida/muerte (para que el profe lo vea en consola)
+    try {
+        BNEntomologo BN_ent = new BNEntomologo();
+
+        var BN_hormigas = BN_ent.etlAntNest(AppConfig.ANTNEST_FILE);
+        var BN_alimentos = BN_ent.etlAntFood(AppConfig.ANTFOOD_FILE);
+
+        if (!BN_hormigas.isEmpty() && !BN_alimentos.isEmpty()) {
+            BN_ent.alimentarAnt(BN_hormigas.get(0), BN_ent.preparar(BN_alimentos.get(0)));
+        }
+
+    } catch (AppException e) {
+        System.out.println("Error en demo alimentar: " + e.getMessage());
+    }
+}
+
+
     // ==========================================
     // MÉTODO PRINCIPAL
     // ==========================================
@@ -89,7 +116,7 @@ public class Sistema {
         app.MABienvenida();
         if (app.MAAutenticacion()) {
             System.out.println("... Cargando módulos del sistema ...");
-            ejecutarETL();
+            app.ejecutarETL();
 
             // Aquí iría el resto del examen
         } else {
