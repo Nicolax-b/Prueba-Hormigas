@@ -1,5 +1,6 @@
 package BusinessLogic.Entities;
 
-public abstract class GenoAlimento {
+
+public abstract class GenoAlimento extends IngestaNativa {
     
 }
