@@ -46,10 +46,10 @@ public class HormigaDTO {
     public void setIdHormigaTipo(Integer idHormigaTipo) {
         IdHormigaTipo = idHormigaTipo;
     }
-    public Integer getIdGenoma()() {
+    public Integer getIdGenoma() {
         return IdGenoma;
     }
-    public void setIdSexo(Integer idGenoma) {
+    public void setIdGenoma(Integer idGenoma) {
         IdGenoma = idGenoma;
     }
     public Integer getIdEstado() {

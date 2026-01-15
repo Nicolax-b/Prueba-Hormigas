@@ -60,14 +60,13 @@ public abstract class BNHormiga implements IHormiga {
         }
     }
 
-    private int getIdSexo(String sexo) {
-        if (sexo == null) return 1;
+    private int getIdGenomaPorSexo(String sexo) {
+        if (sexo == null) return 1; // Default X
         switch (sexo) {
-            case "Asexual": return 1; 
-            case "Macho": return 2;
-            case "Hembra": return 3;
-            default: return 1;
-        }
+            case "Asexual": return 1; // Genoma X
+            case "Macho":   return 2; // Genoma XX
+            case "Hembra":  return 3; // Genoma XY
+            default:        return 1;
     }
 
     // Getters y Setters de Lógica

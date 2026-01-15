@@ -1,9 +1,11 @@
 package BusinessLogic.Entities;
 
-public class HSoldado extends Hormiga {
+public class BNHSoldado extends BNHormiga {
+   
+   
    private String MASuperHabilidad;
    
-   public HSoldado(){
+   public BNHSoldado(){
       super();
       this.bnTipo = "Soldado";
       this.bnSexo = "Macho";
@@ -13,18 +15,20 @@ public class HSoldado extends Hormiga {
    @Override
     public void comer(IngestaNativa alimento) {
         System.out.println("El Soldado come " + alimento.toString());
+        // Lógica extra si fuera necesario
     }
     
     @Override
     public String toString() {
-        return super.toString() + " [Poder: " + bnSuperHabilidad + "]";
+        // 3. Corregido para usar la variable correcta
+        return super.toString() + " [Poder: " + MASuperHabilidad + "]";
     }
 
-    public String getMASuperHabilidad() {
+    public String getSuperHabilidad() {
         return MASuperHabilidad;
     }
 
-    public void setMASuperHabilidad(String MASuperHabilidad) {
-        this.MASuperHabilidad = MASuperHabilidad;
+    public void setSuperHabilidad(String habilidad) {
+        this.MASuperHabilidad = habilidad;
     }
 }
