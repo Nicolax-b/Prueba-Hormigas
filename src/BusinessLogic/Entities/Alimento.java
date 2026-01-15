@@ -7,10 +7,8 @@ public class Alimento extends IngestaNativa {
         this.tipo = tipo;
     }
     
-    // Constructor vacío necesario
     public Alimento(){ }
 
-    // --- ESTOS SON LOS MÉTODOS QUE FALTABAN EN APP.JAVA ---
     public void setGenoAlimento(GenoAlimento genoma) {
         this.genoAlimento = genoma;
     }

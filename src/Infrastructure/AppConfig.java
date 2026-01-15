@@ -5,11 +5,12 @@ import java.net.URL;
 
 public abstract class AppConfig {
     //Paths Storage
-    public static final String DATABASE = "jdbc:sqlite:storage\\Databases\\antCiberDron.sqlite";
-    public static final String DATAFILE = "storage\\DataFiles\\pat_mic.csv";
-    public static final String LOGFILE  = "storage\\Logs\\AppErrors.log";
+    public static final String DATABASE = "jdbc:sqlite:src\\DataAccess\\storage\\Databases\\MAHormiguero.sqlite";
+    public static final String ANTNEST_FILE = "src\\DataAccess\\storage\\DataFiles\\AntNest.text";
+    public static final String ANTFOOD_FILE = "src\\DataAccess\\storage\\DataFiles\\Antfood.txt";
+    public static final String LOGFILE  = "src\\\\DataAccess\\storage\\Logs\\AppErrors.log";
 
-    //Resources
+
     public static final URL URL_MAIN    = AppConfig.class.getResource("Resource/logo.png");
     public static final URL URL_LOGO    = AppConfig.class.getResource("Resource/logo.png");
     public static final URL URL_SPLASH  = AppConfig.class.getResource("/Infrastructure/Assets/Img/Splash.png");

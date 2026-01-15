@@ -30,6 +30,7 @@ public abstract class BNHormiga implements IHormiga {
             bnData.setDescripcion("Simulacion Examen");
             
             // Mapeos
+            bnData.setEstado("A");
             bnData.setIdHormigaTipo(getIdTipo(this.bnTipo));
             bnData.setIdEstado(this.bnEstado.equals("VIVA") ? 1 : 2);
             bnData.setIdGenoma(getIdGenomaPorSexo(this.bnSexo)); 

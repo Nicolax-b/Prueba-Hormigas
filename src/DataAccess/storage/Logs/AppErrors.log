@@ -34,3 +34,7 @@
 ╰──── LOG  ❱❱ 2026-01-13 12:51:37 | HormigaDAO.DataHelperSQLiteDAO | No suitable driver found for jdbc:sqlite:storage\Databases\antCiberDron.sqlite
 ╭─💀─ SHOW ❱❱ Error al instanciar classDAO<T> 
 ╰──── LOG  ❱❱ 2026-01-13 12:51:37 | FactoryBL.FactoryBL(...) | Ups! Error inesperado. Por favor, contacte al administrador del sistema.
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 22:40:01 | HormigaDAO.update | [SQLITE_CONSTRAINT_NOTNULL] A NOT NULL constraint failed (NOT NULL constraint failed: Hormiga.Estado)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 22:42:46 | HormigaDAO.update | [SQLITE_CONSTRAINT_NOTNULL] A NOT NULL constraint failed (NOT NULL constraint failed: Hormiga.FechaCreacion)

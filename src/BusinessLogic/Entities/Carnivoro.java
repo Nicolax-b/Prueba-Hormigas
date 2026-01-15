@@ -1,6 +1,6 @@
 package BusinessLogic.Entities;
 
-public class Carnivoro {
+public class Carnivoro extends Alimento {
     public Carnivoro() {
         super("Carnivoro"); 
     }

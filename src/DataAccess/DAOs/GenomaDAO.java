@@ -8,4 +8,6 @@ public class GenomaDAO extends DataHelperSQLiteDAO<GenomaDTO>{
     public GenomaDAO() throws AppException {
         super(GenomaDTO.class, "Genoma", "IdGenoma");
     }
+    public Integer getIdByNombre(String nombre) throws AppException { ... } // igual patrón
+
 }

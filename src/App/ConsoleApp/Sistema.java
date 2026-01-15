@@ -31,7 +31,7 @@ public class Sistema {
         int MAIntentos = 0;
         final int MA_MAX_INTENTOS = 3;
         
-        String maUsuarioRequerido = "patmic";
+        String maUsuarioRequerido = "pat_mic";
         String maPassRequerido = "123";
 
         System.out.println("\n--- INICIO DE SESIÓN ---");
@@ -47,6 +47,8 @@ public class Sistema {
                 // ÉXITO
                 System.out.println("\n[ ! ] Autenticación Exitosa.");
                 System.out.println("Bienvenido al sistema AntDron2K25\n");
+                System.out.println("|Munoz Angelo      1729053072|");
+                System.out.println("|Bohorquez Nicolas 1753295920|\n");
                 return true;
             } else {
                 // FALLO

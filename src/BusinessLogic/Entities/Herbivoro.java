@@ -1,5 +1,5 @@
 package BusinessLogic.Entities;
 
-public class Herbivoro {
+public class Herbivoro extends Alimento{
     
 }

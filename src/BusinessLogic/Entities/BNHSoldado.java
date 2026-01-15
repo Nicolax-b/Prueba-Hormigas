@@ -15,12 +15,10 @@ public class BNHSoldado extends BNHormiga {
    @Override
     public void comer(IngestaNativa alimento) {
         System.out.println("El Soldado come " + alimento.toString());
-        // Lógica extra si fuera necesario
     }
     
     @Override
     public String toString() {
-        // 3. Corregido para usar la variable correcta
         return super.toString() + " [Poder: " + MASuperHabilidad + "]";
     }
 
