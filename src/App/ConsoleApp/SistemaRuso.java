@@ -1,4 +1,4 @@
-package App.ConsoleApp;
+/* package App.ConsoleApp;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,3 +22,4 @@ public class SistemaRuso {
         return lstCoord;
     }
 }
+ */
