@@ -1,15 +1,18 @@
 package App.ConsoleApp;
 
+import BusinessLogic.Services.BNEntomologo;
+import Infrastructure.AppConfig;
+import Infrastructure.AppException;
 import java.util.Scanner;
 
-public class Sistema { 
+public class Sistema {
 
     // Scanner global con prefijo ma (Munoz Angelo)
     private static Scanner MAScanner = new Scanner(System.in);
 
     /**
-     * REQUERIMIENTO: METODO DE BIENVENIDA
-     * Muestra la cabecera del examen con los integrantes.
+     * REQUERIMIENTO: METODO DE BIENVENIDA Muestra la cabecera del examen con
+     * los integrantes.
      */
     public void MABienvenida() {
         System.out.println("-----------------------------------------");
@@ -23,14 +26,12 @@ public class Sistema {
     }
 
     /**
-     * REQUERIMIENTO: AUTENTICACIÓN
-     * Usuario: patmic
-     * Clave: 123
+     * REQUERIMIENTO: AUTENTICACIÓN Usuario: patmic Clave: 123
      */
     public boolean MAAutenticacion() {
         int MAIntentos = 0;
         final int MA_MAX_INTENTOS = 3;
-        
+
         String maUsuarioRequerido = "pat_mic";
         String maPassRequerido = "123";
 
@@ -55,7 +56,7 @@ public class Sistema {
                 MAIntentos++;
                 int maRestantes = MA_MAX_INTENTOS - MAIntentos;
                 System.err.println("(!) Credenciales incorrectas.");
-                
+
                 if (maRestantes > 0) {
                     System.out.println("Intentos restantes: " + maRestantes);
                 }
@@ -66,18 +67,34 @@ public class Sistema {
         return false;
     }
 
+    public void ejecutarETL() {
+        try {
+            BNEntomologo ent = new BNEntomologo();
+
+            ent.etlAntNest(AppConfig.ANTNEST_FILE);
+            ent.etlAntFood(AppConfig.ANTFOOD_FILE);
+
+            System.out.println("ETL finalizado.");
+        } catch (AppException e) {
+            System.out.println("Error ETL: " + e.getMessage());
+        }
+    }
+
     // ==========================================
     // MÉTODO PRINCIPAL
     // ==========================================
     public static void main(String[] args) {
-        Sistema app = new Sistema(); 
-     
+        Sistema app = new Sistema();
+
         app.MABienvenida();
         if (app.MAAutenticacion()) {
             System.out.println("... Cargando módulos del sistema ...");
+            ejecutarETL();
+
             // Aquí iría el resto del examen
         } else {
             System.exit(0);
         }
+
     }
 }
