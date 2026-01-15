@@ -1,10 +1,10 @@
 package App.ConsoleApp;
 
-public class BNEntomologos {
+public class BNEntomologo {
     private String BNCedula;
     private String BNNombre;
     
-    public BNEntomologos(String BNCedula, String BNNombre) {
+    public BNEntomologo(String BNCedula, String BNNombre) {
         this.BNCedula = BNCedula;
         this.BNNombre = BNNombre;
     }

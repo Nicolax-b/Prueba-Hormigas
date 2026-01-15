@@ -1,37 +1,36 @@
 package App.ConsoleApp;
 
-import BusinessLogic.Services.BNEntomologo;
+import BusinessLogic.Entities.Alimento;
+import BusinessLogic.Entities.BNHormiga;
+import BusinessLogic.Services.BNEntomologoBL;
 import Infrastructure.AppConfig;
 import Infrastructure.AppException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Sistema {
 
-    // Scanner global con prefijo ma (Munoz Angelo)
     private static Scanner MAScanner = new Scanner(System.in);
 
     /**
-     * REQUERIMIENTO: METODO DE BIENVENIDA Muestra la cabecera del examen con
-     * los integrantes.
+     * Muestra la cabecera del examen con los integrantes.
      */
     public void MABienvenida() {
         System.out.println("-----------------------------------------");
-        System.out.println("Prueba");
-        System.out.println("Bimestre II");
+        System.out.println("                Prueba");
+        System.out.println("              Bimestre II");
         System.out.println("");
-        // Datos con Cédulas solicitadas
-        System.out.println("Munoz Angelo      1729053072");
-        System.out.println("Bohorquez Nicolas 1753295920");
+        System.out.println("      |Munoz Angelo      1729053072|");
+        System.out.println("      |Bohorquez Nicolas 1753295920|");
         System.out.println("-----------------------------------------");
     }
 
     /**
-     * REQUERIMIENTO: AUTENTICACIÓN Usuario: patmic Clave: 123
+     * REQUERIMIENTO: AUTENTICACIÓN
      */
     public boolean MAAutenticacion() {
         int MAIntentos = 0;
         final int MA_MAX_INTENTOS = 3;
-
         String maUsuarioRequerido = "pat_mic";
         String maPassRequerido = "123";
 
@@ -40,88 +39,79 @@ public class Sistema {
         while (MAIntentos < MA_MAX_INTENTOS) {
             System.out.print("-> Usuario: ");
             String maUser = MAScanner.nextLine();
-
             System.out.print("-> Contraseña: ");
             String maPass = MAScanner.nextLine();
 
             if (maUser.equals(maUsuarioRequerido) && maPass.equals(maPassRequerido)) {
-                // ÉXITO
                 System.out.println("\n[ ! ] Autenticación Exitosa.");
                 System.out.println("Bienvenido al sistema AntDron2K25\n");
-                System.out.println("|Munoz Angelo      1729053072|");
-                System.out.println("|Bohorquez Nicolas 1753295920|\n");
                 return true;
             } else {
-                // FALLO
                 MAIntentos++;
-                int maRestantes = MA_MAX_INTENTOS - MAIntentos;
-                System.err.println("(!) Credenciales incorrectas.");
-
-                if (maRestantes > 0) {
-                    System.out.println("Intentos restantes: " + maRestantes);
-                }
+                System.err.println("(!) Credenciales incorrectas. Intentos restantes: " + (MA_MAX_INTENTOS - MAIntentos));
             }
         }
-
-        System.err.println("(!) Se han agotado los intentos. El sistema se cerrará.");
         return false;
     }
 
+    /**
+     * Ejecuta el proceso de carga masiva (ETL)
+     */
     public void ejecutarETL() {
         try {
-            BNEntomologo ent = new BNEntomologo();
-
+            BNEntomologoBL ent = new BNEntomologoBL();
             ent.etlAntNest(AppConfig.ANTNEST_FILE);
             ent.etlAntFood(AppConfig.ANTFOOD_FILE);
-
             System.out.println("ETL finalizado.");
         } catch (AppException e) {
             System.out.println("Error ETL: " + e.getMessage());
         }
     }
 
+    /**
+     * REQUERIMIENTO: Alimentar a toda la colonia
+     */
     public void ejecutarAplicacion() {
-    MABienvenida();
+        MABienvenida();
 
-    if (!MAAutenticacion()) {
-        System.exit(0);
-    }
-
-    System.out.println("... Cargando módulos del sistema ...");
-    ejecutarETL(); // <--- Aquí ya se cargaron los datos
-
-    // Demo mínima
-    try {
-        BNEntomologo BN_ent = new BNEntomologo();
-
-        var BN_hormigas = BN_ent.etlAntNest(AppConfig.ANTNEST_FILE); 
-        var BN_alimentos = BN_ent.etlAntFood(AppConfig.ANTFOOD_FILE);
-        
-        if (!BN_hormigas.isEmpty() && !BN_alimentos.isEmpty()) {
-             BN_ent.alimentarAnt(BN_hormigas.get(0), BN_ent.preparar(BN_alimentos.get(0)));
-        }
-
-    } catch (AppException e) {
-        System.out.println("Error en demo alimentar: " + e.getMessage());
-    }
-}
-
-
-    // ==========================================
-    // MÉTODO PRINCIPAL
-    // ==========================================
-    public static void main(String[] args) {
-        Sistema app = new Sistema();
-
-        app.MABienvenida();
-        if (app.MAAutenticacion()) {
-            System.out.println("... Cargando módulos del sistema ...");
-            app.ejecutarETL();
-
-            // Aquí iría el resto del examen
-        } else {
+        if (!MAAutenticacion()) {
             System.exit(0);
         }
 
+        System.out.println("... Cargando módulos del sistema ...");
+        ejecutarETL();
+
+        try {
+            BNEntomologoBL BN_ent = new BNEntomologoBL();
+
+            List<BNHormiga> BN_hormigas = BN_ent.etlAntNest(AppConfig.ANTNEST_FILE);
+            List<Alimento> BN_alimentos = BN_ent.etlAntFood(AppConfig.ANTFOOD_FILE);
+
+            System.out.println("\n--- PROCESO DE ALIMENTACIÓN DE LA COLONIA ---");
+
+            for (int i = 0; i < BN_hormigas.size(); i++) {
+                if (i < BN_alimentos.size()) {
+                    BNHormiga hormigaActual = BN_hormigas.get(i);
+                    Alimento alimentoActual = BN_alimentos.get(i);
+
+                    BNHormiga resultado = BN_ent.alimentarAnt(hormigaActual, BN_ent.preparar(alimentoActual));
+
+                    if (resultado != null && !resultado.getClass().equals(hormigaActual.getClass())) {
+                        System.out.println("-> Registro actualizado: La colonia ahora tiene un nuevo " + resultado.getClass().getSimpleName());
+                    }
+                } else {
+                    break;
+                }
+            }
+        } catch (AppException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }   
+    
+
+
+    public static void main(String[] args) {
+        Sistema app = new Sistema();
+        app.ejecutarAplicacion();
     }
 }
